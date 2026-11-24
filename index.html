@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Inspección Visual PWA</title>
+  <meta name="description" content="Vista previa de cámara con consentimiento explícito y procesamiento 100% local.">
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InspecciónPWA">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="cabecera">
+      <div class="marca">
+        <svg class="marca-icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="2.5" y="6.5" width="19" height="13.5" rx="3" fill="currentColor" opacity="0.18"></rect>
+          <rect x="2.5" y="6.5" width="19" height="13.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
+          <path d="M8.5 6.5 10 4.5h4l1.5 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+          <circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+          <circle cx="17.6" cy="9.8" r="0.9" fill="currentColor"></circle>
+        </svg>
+        <span class="marca-texto">
+          <strong>Inspección Visual</strong>
+          <small>PWA con cámara local</small>
+        </span>
+      </div>
+      <button id="btn-instalar" class="btn btn-instalar" type="button" hidden>
+        Instalar app
+      </button>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="titulo-visor">
+        <h1 id="titulo-visor" class="panel-titulo">Vista previa</h1>
+
+        <div class="visor" id="visor-marco">
+          <video id="visor-camara" autoplay playsinline muted></video>
+          <div class="visor-vacio" id="visor-vacio">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="2.5" y="6.5" width="19" height="13.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"></rect>
+              <path d="M8.5 6.5 10 4.5h4l1.5 2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+              <circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+            </svg>
+            <p>La cámara está apagada</p>
+          </div>
+          <span class="chip" id="chip-modo" hidden>Trasera</span>
+        </div>
+
+        <p class="estado" id="estado" role="status" aria-live="polite">
+          Cámara apagada. Pulsa «Encender cámara» para comenzar.
+        </p>
+
+        <div class="acciones">
+          <button id="btn-preparar-camara" class="btn btn-primario" type="button">
+            Encender cámara
+          </button>
+          <button id="btn-alternar-camara" class="btn btn-secundario" type="button" hidden>
+            Cambiar a frontal
+          </button>
+          <button id="btn-apagar-camara" class="btn btn-peligro" type="button" hidden>
+            Apagar cámara
+          </button>
+        </div>
+      </section>
+
+      <section id="aviso-permiso" class="aviso" aria-labelledby="aviso-titulo" hidden>
+        <h2 id="aviso-titulo">Antes de encender la cámara</h2>
+        <p class="aviso-texto">
+          Esta aplicación requiere acceso a tu cámara únicamente para mostrar una
+          vista previa local en pantalla. <strong>Ninguna imagen se envía a servidores externos.</strong>
+        </p>
+        <ul class="aviso-lista">
+          <li>Se encenderá la cámara <strong id="aviso-lente">trasera</strong>.</li>
+          <li>El video se procesa y permanece solo en tu dispositivo.</li>
+          <li>Puedes detener la cámara o revocar el permiso en cualquier momento.</li>
+        </ul>
+        <p class="aviso-nota">
+          Al continuar, el navegador mostrará su propio diálogo de permiso.
+          Si pulsas «Bloquear», deberás habilitarlo manualmente en los ajustes del sitio.
+        </p>
+        <div class="acciones">
+          <button id="btn-confirmar-permiso" class="btn btn-primario" type="button">
+            Aceptar y encender cámara
+          </button>
+          <button id="btn-cancelar-permiso" class="btn btn-fantasma" type="button">
+            Ahora no
+          </button>
+        </div>
+      </section>
+
+      <section id="ayuda-ios" class="ayuda" aria-labelledby="ayuda-titulo" hidden>
+        <h2 id="ayuda-titulo">Instalar en iPhone / iPad</h2>
+        <p>
+          Safari no muestra un botón de instalación automático. Para abrir esta app
+          sin la barra del navegador:
+        </p>
+        <ol>
+          <li>Toca el botón <strong>Compartir</strong>.</li>
+          <li>Elige <strong>Añadir a pantalla de inicio</strong>.</li>
+          <li>Confirma con <strong>Añadir</strong> y abre el icono creado.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>
+        Privacidad primero: el permiso de cámara se solicita solo después de tu
+        confirmación explícita y el flujo de video nunca sale del dispositivo.
+      </p>
+    </footer>
+  </div>
+
+  <noscript>
+    <p class="sin-js">Esta aplicación necesita JavaScript para acceder a la cámara.</p>
+  </noscript>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
