@@ -35,6 +35,10 @@
     return modo === 'environment' ? 'trasera' : 'frontal';
   }
 
+  function etiquetaLente(modo) {
+    return modo === 'environment' ? 'Trasera' : 'Frontal';
+  }
+
   function esModoStandalone() {
     const porMediaQuery = window.matchMedia('(display-mode: standalone)').matches;
     const porSafari = window.navigator.standalone === true;
@@ -82,7 +86,7 @@
 
     visorVacio.hidden = camaraActiva;
     chipModo.hidden = !camaraActiva;
-    chipModo.textContent = camaraActiva ? nombreLente(modoCamaraActual) : '';
+    chipModo.textContent = camaraActiva ? etiquetaLente(modoCamaraActual) : '';
 
     btnPreparar.hidden = camaraActiva;
     btnAlternar.hidden = !camaraActiva;
