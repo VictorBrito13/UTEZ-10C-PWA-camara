@@ -193,6 +193,7 @@
   }
 
   btnPreparar.addEventListener('click', () => {
+    modoCamaraActual = 'environment';
     actualizarControles();
 
     consultarPermisoCamara()
@@ -230,8 +231,9 @@
   btnApagar.addEventListener('click', () => {
     detenerCamaraActiva();
     visorVideo.srcObject = null;
+    modoCamaraActual = 'environment';
     actualizarControles();
-    actualizarMensajeEstado('Cámara apagada. El sensor quedó liberado.');
+    actualizarMensajeEstado('Cámara apagada. El sensor quedó liberado; el próximo encendido usará la cámara trasera.');
   });
 
   window.addEventListener('beforeinstallprompt', (event) => {

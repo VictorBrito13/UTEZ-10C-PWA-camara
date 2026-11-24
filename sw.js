@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'inspeccion-visual-v1';
+const CACHE_NAME = 'inspeccion-visual-v2';
 
 const APP_SHELL = [
   './',

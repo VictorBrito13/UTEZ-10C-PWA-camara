@@ -57,7 +57,7 @@ Evitar pulsar «Bloquear» por sorpresa es clave: esa decisión queda guardada p
 - La vista frontal se muestra espejada con la clase `.espejo` (`transform: scaleX(-1)`), como en las apps nativas.
 - Errores diferenciados en `.catch()`: `NotAllowedError`, `NotFoundError`, `NotReadableError`, `OverconstrainedError`, `SecurityError`, `NotSupportedError`.
 - `<video autoplay playsinline muted>`: `playsinline` evita que iOS/Safari abra el reproductor a pantalla completa.
-- **Apagar cámara** detiene los tracks, limpia `srcObject` y libera el sensor.
+- **Apagar cámara** detiene los tracks, limpia `srcObject` y libera el sensor. Cada nuevo encendido vuelve a iniciar con la cámara trasera.
 
 ## Instalabilidad
 
